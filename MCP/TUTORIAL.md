@@ -50,7 +50,7 @@ Sem MCP:                        Com MCP:
 ```
 ┌──────────────┐         stdio/HTTP         ┌──────────────┐
 │   Cliente    │  ◄──────────────────────►  │  Servidor    │
-│   (LLM)      │     JSON-RPC 2.0          │  MCP         │
+│   (LLM)      │     JSON-RPC 2.0           │  MCP         │
 └──────────────┘                            └──────────────┘
                                                   │
                                            ┌──────┴──────┐
@@ -325,12 +325,12 @@ export const calculatorTool = {
 
 **Cada tool e um objeto com 4 propriedades obrigatorias:**
 
-| Propriedade | Tipo | Descricao |
-|-------------|------|-----------|
-| `name` | string | Identificador unico |
-| `description` | string | Descricao para o LLM |
-| `inputSchema` | object (Zod) | Schema Zod dos parametros (SDK converte para JSON Schema) |
-| `execute` | async function | Funcao que processa a requisicao |
+| Propriedade   | Tipo            | Descricao                                                 |
+|---------------|-----------------|-----------------------------------------------------------|
+| `name`        | string          | Identificador unico                                       |
+| `description` | string          | Descricao para o LLM                                      |
+| `inputSchema` | object (Zod)    | Schema Zod dos parametros (SDK converte para JSON Schema) |
+| `execute`     | async function  | Funcao que processa a requisicao                          |
 
 ---
 
@@ -370,11 +370,11 @@ Isso ajuda o LLM a corrigir automaticamente a requisicao.
 
 #### Tools Disponiveis
 
-| Tool | Funcao |
-|------|--------|
+| Tool          | Funcao                              |
+|---------------|-------------------------------------|
 | `create_note` | Cria uma nota com titulo e conteudo |
-| `list_notes` | Lista todas as notas salvas |
-| `delete_note` | Deleta uma nota pelo ID |
+| `list_notes`  | Lista todas as notas salvas         |
+| `delete_note` | Deleta uma nota pelo ID             |
 
 #### Armazenamento em Memoria
 
@@ -401,11 +401,11 @@ Tool:  "Faça algo"     → calculator("2+2")    → "Resultado: 4"
 Resource: "Leia algo"  → system://info         → "{ platform: 'win32', ... }"
 ```
 
-| Aspecto | Tool | Resource |
-|---------|------|----------|
-| Acao | Executa uma operacao | Fornece dados |
-| Modificador | Pode alterar estado | Apenas leitura |
-| Exemplo | Calculadora, salvar nota | Ler arquivo, info do sistema |
+| Aspecto     | Tool                      | Resource                      |
+|-------------|---------------------------|-------------------------------|
+| Acao        | Executa uma operacao      | Fornece dados                 |
+| Modificador | Pode alterar estado       | Apenas leitura                |
+| Exemplo     | Calculadora, salvar nota  | Ler arquivo, info do sistema  |
 
 #### URI (Identificador Uniforme de Recurso)
 
@@ -478,11 +478,11 @@ O cliente MCP lista os prompts disponiveis e os apresenta ao usuario. O usuario 
         └──────────┘   └──────────┘   └──────────┘
 ```
 
-| Pilar | Acao | Analogia |
-|-------|------|----------|
-| **Tools** | O LLM executa uma funcao | Um botao que o LLM pode clicar |
-| **Resources** | O LLM le um dado | Um arquivo que o LLM pode abrir |
-| **Prompts** | O LLM usa um template | Um formulario pre-preenchido |
+| Pilar         | Acao                     | Analogia                        |
+|---------------|--------------------------|---------------------------------|
+| **Tools**     | O LLM executa uma funcao | Um botao que o LLM pode clicar  |
+| **Resources** | O LLM le um dado         | Um arquivo que o LLM pode abrir |
+| **Prompts**   | O LLM usa um template    | Um formulario pre-preenchido    |
 
 ### Protocolo JSON-RPC 2.0
 
@@ -516,22 +516,22 @@ Toda comunicacao MCP usa JSON-RPC 2.0:
 
 ### Metodos Principais do MCP
 
-| Metodo | Descricao |
-|--------|-----------|
-| `tools/list` | Lista todas as tools disponiveis |
-| `tools/call` | Chama uma tool especifica |
-| `resources/list` | Lista todos os resources |
-| `resources/read` | Le um resource pelo URI |
-| `prompts/list` | Lista todos os prompts |
-| `prompts/get` | Obtem um prompt formatado |
-| `initialize` | Handshake inicial cliente-servidor |
+| Metodo            | Descricao                         |
+|-------------------|-----------------------------------|
+| `tools/list`      | Lista todas as tools disponiveis  |
+| `tools/call`      | Chama uma tool especifica         |
+| `resources/list`  | Lista todos os resources          |
+| `resources/read`  | Le um resource pelo URI           |
+| `prompts/list`    | Lista todos os prompts            |
+| `prompts/get`     | Obtem um prompt formatado         |
+| `initialize`      | Handshake inicial cliente-servidor|
 
 ### Transporte
 
-| Transporte | Descricao | Uso |
-|------------|-----------|-----|
+| Transporte| Descricao    | Uso                      |
+|-----------|--------------|--------------------------|
 | **Stdio** | stdin/stdout | CLI, integracao com IDEs |
-| **HTTP** | HTTP com SSE | Servidor remoto, web |
+| **HTTP**  | HTTP com SSE | Servidor remoto, web     |
 
 Este projeto usa **Stdio** (padrao para ferramentas de desenvolvimento local).
 
